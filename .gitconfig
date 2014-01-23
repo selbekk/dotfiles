@@ -1,0 +1,79 @@
+[include]
+    path = ~/.gitconfig-user
+    # Include user specific information
+
+[core]
+    editor = vim 
+    excludesfile = /opt/boxen/config/git/gitignore
+    autocrlf = input
+    # Convert line endings to platform input (LF on *nix, CRLF on windows).
+    # In other words, don't use this on windows. Use 'true' instead.
+    # Use a .gitattributes file in projects to avoid problems with line endings
+    # from participants on disparate platforms.
+
+[commit]
+    template = ~/.gitmessage
+
+[push]
+    default = upstream
+
+[merge]
+    tool = opendiff
+    log = true
+    # Include summaries of merged commits in merge commit messages.
+
+[rerere]
+    enabled = true
+    # Re-use recorded resolutions of conflicts.
+
+[color]
+    ui = auto
+  [color "branch"]
+    current = yellow reverse
+    local = yellow
+    remote = green
+  [color "diff"]
+    meta = yellow bold
+    frag = magenta bold
+    old = red bold
+    new = green bold
+  [color "status"]
+    added = yellow
+    changed = green
+    untracked = cyan
+
+[alias]
+    st = status
+    ci = commit
+    br = branch
+    co = checkout
+    unfuck = checkout
+    df = diff
+    lg = log -p
+    lol = log --graph --decorate --pretty=oneline --abbrev-commit
+    lola = log --graph --decorate --pretty=oneline --abbrev-commit --all
+    yolo = push
+    fakemerge = merge --no-commit
+    ac = commit -a
+    unstage = reset HEAD
+    branches = !git-branches
+    put = push origin HEAD
+    rpo = remote prune origin
+    cob = !sh -c 'git co -b "$0"'
+    cor = !sh -c 'git co -t "$0"'
+    rmbr = !sh -c 'git branch -D "$0" && git push origin ":$0"'
+    smerge = merge --squash
+    dt = !sh -c 'git tag -d "$0" && git push origin :refs/tags/$0'
+    release-tag = !sh -c 'TAG=$0-`date +"%Y%m%d%H%M%S"` && echo "Creating Tag: $TAG" && git tag $TAG -am \"$1\" && git push --tags origin master'
+    ig = update-index --assume-unchanged
+    unig = update-index --no-assume-unchanged
+	su = submodule update
+    
+[hub]
+    protocol = https
+
+[credential]
+    helper = /opt/boxen/bin/boxen-git-credential
+[user]
+	name = selbekk
+	email = kristofer.selbekk@bekk.no
